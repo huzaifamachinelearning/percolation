@@ -5,4 +5,4 @@ We have an  n by n grid with its sites  either open or blocked. A acontinuous ch
 
 The percolation class gives method to initialize a grid ,open a blocked site, tell if the system percolates among other useful methods. The percolationStats give methods to run trials to determine the value of p*.
 
-Classes PercolationVisualizer and Interactive PercolationVisualizer were provided by the instructors .The test-materials contain files and corresponding images that should be generated when you run the PercoalationVisualizer class with the file as an argument. The InteractivePercolationVisualizer class lets you open sites interactively you just have to pass the size of the grid
+Classes PercolationVisualizer and Interactive PercolationVisualizer were provided by the instructors .The test-materials contain files and corresponding images that should be generated when you run the PercoalationVisualizer class with the file as a command line  argument. The InteractivePercolationVisualizer class lets you open sites interactively you just have to pass the size of the grid as a command line argument
