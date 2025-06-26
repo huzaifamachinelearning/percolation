@@ -4,6 +4,8 @@
  *  Last modified:     1/1/2019
  **************************************************************************** */
 
+
+
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
@@ -20,10 +22,10 @@ public class Percolation {
             throw new IllegalArgumentException("n cannot be negative: " + n);
         }
         N = n;
-        uf = new WeightedQuickUnionUF(n * n + 2);
+        uf = new WeightedQuickUnionUF(n * n + 1);
         ufd = new WeightedQuickUnionUF(n * n + 2);
 
-        status = new boolean[n * n + 2];
+        status = new boolean[n * n + 1];
         statusd = new boolean[n * n + 2];
         status[0] = true;
         statusd[n * n + 1] = true;
@@ -40,7 +42,7 @@ public class Percolation {
 
         if (!status[n]) {
 
-            if (((n + 1) % N != 1) && status[n + 1]) {
+            if (((n + 1) % N != 1) && (N>1) && status[n + 1]) {
                 uf.union(n + 1, n);
             }
             if (((n - 1) % N != 0) && status[n - 1]) {
@@ -73,25 +75,26 @@ public class Percolation {
                     }
             }
             status[n] = true;
-
+            if(flag==1) openSites++;
         }
+
     }
 
     public void open(int row, int col) {
         int n = getIndex(row, col);
-        if (n < 1 || n > N * N) {
+        if (row<1 || row>N ||col<1 || col>N) {
             throw new IllegalArgumentException("site (" + row + "," + col + ") does not exist");
         }
         opening(n, status, uf, 1);
         opening(n, statusd, ufd, 2);
-        openSites++;
+
 
 
     }
 
     public boolean isOpen(int row, int col) {
         int n = getIndex(row, col);
-        if (n < 1 || n > N * N) {
+        if (row<1 || row>N ||col<1 || col>N) {
             throw new IllegalArgumentException("site (" + row + "," + col + ") does not exist");
         }
         return status[n];
@@ -99,7 +102,7 @@ public class Percolation {
 
     public boolean isFull(int row, int col) {
         int n = getIndex(row, col);
-        if (n < 1 || n > N * N) {
+        if (row<1 || row>N ||col<1 || col>N) {
             throw new IllegalArgumentException("site (" + row + "," + col + ") does not exist");
         }
         return uf.find(n) == uf.find(0);
@@ -112,5 +115,7 @@ public class Percolation {
     public boolean percolates() {
         return ufd.find(N * N + 1) == ufd.find(0);
     }
+
+    
 }
 
