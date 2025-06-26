@@ -12,6 +12,9 @@ public class PercolationStats {
 
     // perform independent trials on an n-by-n grid
     public PercolationStats(int n, int trials){
+        if (n <= 0 || trials <= 0) {
+            throw new IllegalArgumentException("n and trials must be greater than 0");
+        }
         T=trials;
         frOpen=new double[T];
         int randInt;
@@ -22,10 +25,11 @@ public class PercolationStats {
         for(int i=0;i<T;i++){
 
             p=new Percolation(n);
+
             while(!p.percolates()){
                 randInt = StdRandom.uniformInt(1, n * n + 1);
-                row=randInt/n+1;
-                col=randInt%n;
+                row=(randInt-1)/n+1;
+                col=(randInt-1)%n+1;
                 if(!p.isOpen(row,col)){
                     p.open(row,col);
 
